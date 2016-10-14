@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>GEOCHAT</title>
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+  <div class="container-fluid">
+    <header>
+    <div class="row">
+      <h1>GEOCHAT</h1>
+    </div>
+    <div class="row">
+      <h2 id="current"></h2>
+    </div>
+    </header>
+
+    <section id="main" role="main">
+      <div id="chat" class="row">
+        <div class="col-xs-10 col-sm-10">
+          <input class="form-group" type="text" id="input" placeholder="Type your message..."> 
+        </div>
+        <div class="col-xs-2 col-sm-2">
+          <button id="button" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+  <button id="random">Master</button>
+  
+
+  <p id="presence"></p>
+  <div id="output"></div>
+
+</section>
+    <script src='http://cdn.pubnub.com/pubnub-3.7.13.min.js'></script>
+
+        <script src="js/index.js"></script>
+
+    
+    
+    </div>
+  </body>
+</html>

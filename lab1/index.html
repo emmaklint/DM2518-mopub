@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <title>Mopub Lab 1</title>
+
+    <!-- Allow web app to be run in full-screen mode. -->
+       <meta name="apple-mobile-web-app-capable"
+             content="yes">
+
+       <!-- Make the app title different than the page title. -->
+       <meta name="apple-mobile-web-app-title"
+             content="Road to nowhere">
+
+       <!-- Configure the status bar. -->
+       <meta name="apple-mobile-web-app-status-bar-style"
+             content="black">
+
+       <!-- Set the viewport. -->
+       <meta name="viewport"
+             content="initial-scale=1">
+
+       <!-- Disable automatic phone number detection. -->
+       <meta name="format-detection"
+             content="telephone=no">
+
+       <!-- ICONS -->
+
+       <!-- iPad retina icon -->
+       <link href="https://placehold.it/152"
+             sizes="152x152"
+             rel="apple-touch-icon-precomposed">
+
+       <!-- iPad retina icon (iOS < 7) -->
+       <link href="https://placehold.it/144"
+             sizes="144x144"
+             rel="apple-touch-icon-precomposed">
+
+       <!-- iPad non-retina icon -->
+       <link href="https://placehold.it/76"
+             sizes="76x76"
+             rel="apple-touch-icon-precomposed">
+
+       <!-- iPad non-retina icon (iOS < 7) -->
+       <link href="https://placehold.it/72"
+             sizes="72x72"
+             rel="apple-touch-icon-precomposed">
+
+       <!-- iPhone 6 Plus icon -->
+       <link href="icon/180.png"
+             sizes="120x120"
+             rel="apple-touch-icon-precomposed">
+
+       <!-- iPhone retina icon (iOS < 7) -->
+       <link href="https://placehold.it/114"
+             sizes="114x114"
+             rel="apple-touch-icon-precomposed">
+
+       <!-- iPhone non-retina icon (iOS < 7) -->
+       <link href="https://placehold.it/57"
+             sizes="57x57"
+             rel="apple-touch-icon-precomposed">
+
+       <!-- STARTUP IMAGES -->
+
+       <!-- iPad retina portrait startup image -->
+       <link href="https://placehold.it/1536x2008"
+             media="(device-width: 768px) and (device-height: 1024px)
+                    and (-webkit-device-pixel-ratio: 2)
+                    and (orientation: portrait)"
+             rel="apple-touch-startup-image">
+
+       <!-- iPad retina landscape startup image -->
+       <link href="https://placehold.it/1496x2048"
+             media="(device-width: 768px) and (device-height: 1024px)
+                    and (-webkit-device-pixel-ratio: 2)
+                    and (orientation: landscape)"
+             rel="apple-touch-startup-image">
+
+       <!-- iPad non-retina portrait startup image -->
+       <link href="https://placehold.it/768x1004"
+             media="(device-width: 768px) and (device-height: 1024px)
+                    and (-webkit-device-pixel-ratio: 1)
+                    and (orientation: portrait)"
+             rel="apple-touch-startup-image">
+
+       <!-- iPad non-retina landscape startup image -->
+       <link href="https://placehold.it/748x1024"
+             media="(device-width: 768px) and (device-height: 1024px)
+                    and (-webkit-device-pixel-ratio: 1)
+                    and (orientation: landscape)"
+             rel="apple-touch-startup-image">
+
+       <!-- iPhone 6 Plus portrait startup image -->
+       <link href="https://placehold.it/1242x2148"
+             media="(device-width: 414px) and (device-height: 736px)
+                    and (-webkit-device-pixel-ratio: 3)
+                    and (orientation: portrait)"
+             rel="apple-touch-startup-image">
+
+       <!-- iPhone 6 Plus landscape startup image -->
+       <link href="https://placehold.it/1182x2208"
+             media="(device-width: 414px) and (device-height: 736px)
+                    and (-webkit-device-pixel-ratio: 3)
+                    and (orientation: landscape)"
+             rel="apple-touch-startup-image">
+
+       <!-- iPhone 6 startup image -->
+       <link href="https://placehold.it/750x1294"
+             media="(device-width: 375px) and (device-height: 667px)
+                    and (-webkit-device-pixel-ratio: 2)"
+             rel="apple-touch-startup-image">
+
+       <!-- iPhone 5 startup image -->
+       <link href="https://placehold.it/640x1096"
+             media="(device-width: 320px) and (device-height: 568px)
+                    and (-webkit-device-pixel-ratio: 2)"
+             rel="apple-touch-startup-image">
+
+       <!-- iPhone < 5 retina startup image -->
+       <link href="https://placehold.it/640x920"
+             media="(device-width: 320px) and (device-height: 480px)
+                    and (-webkit-device-pixel-ratio: 2)"
+             rel="apple-touch-startup-image">
+
+       <!-- iPhone < 5 non-retina startup image -->
+       <link href="https://placehold.it/320x460"
+             media="(device-width: 320px) and (device-height: 480px)
+                    and (-webkit-device-pixel-ratio: 1)"
+             rel="apple-touch-startup-image">
+
+       <!-- HACKS -->
+
+       <!-- Prevent text size change on orientation change. -->
+
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+   <button type="button" onclick="goTo('home')">Home</button>
+   <button type="button" onclick="goTo('nymble')">Nymble</button>
+   <button type="button" onclick="goTo('nkpg')">Norrköping</button>
+    <div id="map">
+      
+    </div>
+
+    <script>
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 18,
+          center: sthlm,
+          tilt: 45,
+          disableDefaultUI: true,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        marker = new google.maps.Marker({
+        	position: sthlm,
+        	map: map,
+        	draggable: true,
+        	animation: google.maps.Animation.DROP
+        });
+
+        // Create the DIV to hold the control and call the CenterControl()
+        // constructor passing in this DIV.
+
+        var sthlm = {lat: 59.329323, lng: 18.068581};
+        var kth = {lat: 59.347382, lng: 18.073859};
+        
+        var kthControlDiv = document.createElement('div');
+        var kthControl = new buttonControl(kthControlDiv, map, 'KTH', kth);
+
+        var sthlmControlDiv = document.createElement('div');
+        var sthlmControl = new buttonControl(sthlmControlDiv, map, 'Stockholm', sthlm);
+
+        kthControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(kthControlDiv);
+
+        sthlmControlDiv.index = 2;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(sthlmControlDiv);
+
+        var infoWindow = new google.maps.InfoWindow({map: map});
+
+        if (navigator.geolocation) {
+           navigator.geolocation.getCurrentPosition(function(position) {
+             var pos = {
+               lat: position.coords.latitude,
+               lng: position.coords.longitude
+             };
+
+             infoWindow.setPosition(pos);
+             infoWindow.setContent('Hello! You are here!');
+             map.setCenter(pos);
+
+             var hereControlDiv = document.createElement('div');
+             var hereControl = new buttonControl(hereControlDiv, map, 'your current place', pos);
+
+             hereControlDiv.index = 3;
+             map.controls[google.maps.ControlPosition.TOP_CENTER].push(hereControlDiv);
+
+
+
+           }, function() {
+             handleLocationError(true, infoWindow, map.getCenter());
+           });
+         } else {
+           // Browser doesn't support Geolocation
+           handleLocationError(false, infoWindow, map.getCenter());
+         }
+
+         var zoomInDiv = document.createElement('div');
+         var zoomInControl = new zoomControl(zoomInDiv, map, 'plus', 1)
+         zoomInDiv.index=1;
+         map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zoomInDiv)
+
+         var zoomOutDiv = document.createElement('div');
+         var zoomOutControl = new zoomControl(zoomOutDiv, map, 'minus', -1)
+         zoomOutDiv.index=2;
+         map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zoomOutDiv)
+
+      }
+
+      var map;
+      var marker;
+      var sthlm = {lat: 59.329323, lng: 18.068581};
+      var kth = {lat: 59.347382, lng: 18.073859};
+
+      function buttonControl(controlDiv, map, title, place) {
+        var title = title;
+        console.log(title);
+
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to recenter the map';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'Go to ' + title;
+        controlUI.appendChild(controlText);
+
+        controlUI.addEventListener('click', function() {
+          map.setCenter(place);
+
+          if (title == 'Stockholm') {
+            map.setTilt(45);
+            map.setMapTypeId(google.maps.MapTypeId.SATELLITE)
+          } else if (title == 'KTH') {
+            map.setTilt(0);
+            map.setMapTypeId(google.maps.MapTypeId.SATELLITE)
+          } else {
+            map.setTilt(0);
+            map.setMapTypeId(google.maps.MapTypeId.ROADMAP)
+          }
+
+          marker.setPosition(place);
+          marker.setDraggable(false);
+
+        });
+
+      }
+
+      function zoomControl(zoomDiv, map, icon, value) {
+
+        var thisIcon = '<img src="icon/' + icon + '.png">';
+
+        var zoomUI = document.createElement('div');
+          zoomUI.style.backgroundColor = '#fff';
+          zoomUI.style.border = '2px solid #fff';
+          zoomUI.style.borderRadius = '3px';
+          zoomUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+          zoomUI.style.cursor = 'pointer';
+          zoomUI.style.marginBottom = '22px';
+          zoomUI.style.textAlign = 'center';
+          zoomUI.title = 'Click to recenter the map';
+          zoomDiv.appendChild(zoomUI);
+
+        var zoomText = document.createElement('div');
+          zoomText.style.color = 'rgb(25,25,25)';
+          zoomText.style.fontFamily = 'Roboto,Arial,sans-serif';
+          zoomText.style.fontSize = '16px';
+          zoomText.style.lineHeight = '38px';
+          zoomText.style.paddingLeft = '5px';
+          zoomText.style.paddingRight = '5px';
+          zoomText.innerHTML = thisIcon;
+          zoomUI.appendChild(zoomText);
+
+        // Setup the click event listeners: simply set the map to Chicago.
+          zoomUI.addEventListener('click', function() {
+            map.setZoom(map.getZoom() + value);
+          });
+
+      }
+
+      function goTo(myPlace){
+        if (myPlace == 'nymble') {
+          var cord = {lat: 59.347307, lng: 18.070708}; 
+        } else if (myPlace == 'nkpg') {
+          var cord = {lat: 58.587745, lng: 16.192421};
+        } else if (myPlace == 'home') {
+          var cord = {lat: 59.341828, lng: 18.031107};
+        }
+
+        map.setCenter(cord)
+        marker.setPosition(cord)
+      }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?callback=initMap">
+    </script>
+  </body>
+</html>
